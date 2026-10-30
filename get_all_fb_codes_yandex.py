@@ -69,3 +69,62 @@ with open("accounts.txt", "w", encoding="utf-8") as file:
     for idx, (email_addr, code) in enumerate(unique_accounts.items(), 1):
         print(f"[{idx}] {email_addr}  ==>  {code}")
         file.write(f"{email_addr}|{code}\n")
+
+
+
+
+
+
+
+def count_emails():
+    try:
+        mail = imaplib.IMAP4_SSL("imap.yandex.com", 993)
+        mail.login(EMAIL, PASSWORD)
+        mail.select("INBOX", readonly=True)
+
+        _, total = mail.search(None, "ALL")
+        _, unread = mail.search(None, "UNSEEN")
+
+        total_count = len(total[0].split())
+        unread_count = len(unread[0].split())
+
+        print(f"[*] Total: {total_count}")
+        print(f"[*] Unread: {unread_count}")
+
+        mail.logout()
+        return total_count, unread_count
+
+    except Exception as e:
+        print(f"[-] Error: {e}")
+        return 0, 0
+
+
+# ==================== DELETE ALL EMAILS ====================
+
+def delete_all_emails():
+    try:
+        mail = imaplib.IMAP4_SSL("imap.yandex.com", 993)
+        mail.login(EMAIL, PASSWORD)
+        mail.select("INBOX")
+
+        _, data = mail.search(None, "ALL")
+        ids = data[0].split()
+
+        if ids:
+            mail.store(b",".join(ids), "+FLAGS", "\\Deleted")
+            mail.expunge()
+
+        print(f"[+] Deleted: {len(ids)} Emails")
+
+        mail.logout()
+
+    except Exception as e:
+        print(f"[-] Error: {e}")
+
+
+
+
+
+
+
+
