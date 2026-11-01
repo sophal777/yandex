@@ -489,31 +489,92 @@ class LDPlayerLauncher:
         lng: Optional[float] = None
     ) -> bool:
         """កំណត់ទីតាំង GPS (ផ្ទាំងទោល, បញ្ជីផ្ទាំង, ឬ ទាំងអស់ "all" ជាមួយ City USA & Global)"""
+
+           
         city_db = {
-            # USA
+            # ==========================================
+            # សហរដ្ឋអាមេរិក (USA - Major Cities & States)
+            # ==========================================
+            # California (CA)
             "los angeles": (34.0522, -118.2437),
             "san francisco": (37.7749, -122.4194),
             "san diego": (32.7157, -117.1611),
+            "san jose": (37.3382, -121.8863),
+            "sacramento": (38.5816, -121.4944),
+
+            # New York (NY) & East Coast
             "new york": (40.7128, -74.0060),
-            "boston": (42.3601, -71.0589),
-            "washington dc": (38.9072, -77.0369),
+            "buffalo": (42.8864, -78.8784),
+            "boston": (42.3601, -71.0589),          # Massachusetts
+            "philadelphia": (39.9526, -75.1652),    # Pennsylvania
+            "pittsburgh": (40.4406, -79.9959),
+            "washington dc": (38.9072, -77.0369),   # DC Capital
+            "newark": (40.7357, -74.1724),          # New Jersey
+
+            # Texas (TX)
             "houston": (29.7604, -95.3698),
             "dallas": (32.7767, -96.7970),
             "austin": (30.2672, -97.7431),
+            "san antonio": (29.4241, -98.4936),
+            "fort worth": (32.7555, -97.3308),
+
+            # Florida (FL)
             "miami": (25.7617, -80.1918),
             "orlando": (28.5383, -81.3792),
-            "chicago": (41.8781, -87.6298),
-            "seattle": (47.6062, -122.3321),
-            "las vegas": (36.1699, -115.1398),
-            # កម្ពុជា & អាស៊ី
+            "tampa": (27.9506, -82.4572),
+            "jacksonville": (30.3322, -81.6557),
+
+            # Midwest & Central
+            "chicago": (41.8781, -87.6298),         # Illinois
+            "detroit": (42.3314, -83.0458),         # Michigan
+            "columbus": (39.9612, -82.9988),        # Ohio
+            "cleveland": (41.4993, -81.6944),
+            "indianapolis": (39.7684, -86.1581),    # Indiana
+            "kansas city": (39.0997, -94.5786),     # Missouri
+            "st louis": (38.6270, -90.1994),
+            "minneapolis": (44.9778, -93.2650),     # Minnesota
+
+            # South & Southeast
+            "atlanta": (33.7490, -84.3880),         # Georgia
+            "charlotte": (35.2271, -80.8431),       # North Carolina
+            "raleigh": (35.7796, -78.6382),
+            "nashville": (36.1627, -86.7816),       # Tennessee
+            "memphis": (35.1495, -90.0490),
+            "new orleans": (29.9511, -90.0715),     # Louisiana
+
+            # West & Mountain States
+            "seattle": (47.6062, -122.3321),        # Washington
+            "portland": (45.5152, -122.6784),       # Oregon
+            "las vegas": (36.1699, -115.1398),      # Nevada
+            "phoenix": (33.4484, -112.0740),        # Arizona
+            "denver": (39.7392, -104.9903),         # Colorado
+            "salt lake city": (40.7608, -111.8910), # Utah
+            "honolulu": (21.3069, -157.8583),       # Hawaii
+            "anchorage": (61.2181, -149.9003),      # Alaska
+
+            # ==========================================
+            # កម្ពុជា (Cambodia)
+            # ==========================================
             "phnom penh": (11.5564, 104.9282),
             "siem reap": (13.3671, 103.8448),
+            "battambang": (13.0957, 103.2022),
+            "sihanoukville": (10.6275, 103.5221),
+
+            # ==========================================
+            # អាស៊ី និងអឺរ៉ុប (Asia & Europe)
+            # ==========================================
             "bangkok": (13.7563, 100.5018),
-            "tokyo": (35.6762, 139.6503),
             "singapore": (1.3521, 103.8198),
+            "kuala lumpur": (3.1390, 101.6869),
+            "ho chi minh": (10.8231, 106.6297),
+            "tokyo": (35.6762, 139.6503),
+            "seoul": (37.5665, 126.9780),
             "london": (51.5074, -0.1278),
+            "paris": (48.8566, 2.3522),
+            "sydney": (-33.8688, 151.2093),
         }
 
+ 
         if isinstance(location, str):
             city_key = location.strip().lower()
             if city_key in city_db:
